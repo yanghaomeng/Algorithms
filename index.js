@@ -1,3 +1,61 @@
+//插入排序
+console.log(insertSort([24,12,53,2,123]))
+function insertSort(arr) {
+    for (let i = 1; i < arr.length; i++) {
+        let key = arr[i];
+        let j = i - 1;
+        while (arr[j] > key) {
+            arr[j+1] = arr[j];
+            j--;
+        }
+        arr[j+1] = key;
+    }
+    return arr;
+}
+
+//冒泡排序
+function bubblingSort(arr) {
+    let low = 0;
+    let high = arr.length - 1;
+    let i;
+    while (low < high) {
+        for (i = low; i < high; i++) {
+            if (arr[i] > arr[i + 1]) {
+                [arr[i], arr[i + 1]] = [arr[i + 1], arr[i]];
+            }
+        }
+        high--;
+        for (i = high; i > low; i--) {
+            if (arr[i - 1] > arr[i]) {
+                [arr[i], arr[i - 1]] = [arr[i - 1], arr[i]];
+            }
+        }
+        low++;
+    }
+    return arr;
+}
+
+//归并算法
+function merge(left, right) {
+    let result = [];
+    while (left.length && right.length) {
+        if (left[0] < right[0]) {
+            result.push(left.shift());
+        } else {
+            result.push(right.shift());
+        }
+    }
+    return result.concat(left, right);
+}
+function mergeSort(arr) {
+    if (arr.length === 1) {
+        return arr;
+    }
+    let mid = Math.floor(arr.length / 2);
+    let left = arr.slice(0, mid);
+    let right = arr.slice(mid);
+    return merge(mergeSort(left), mergeSort(right));
+}
 //狄克斯特拉算法
 // let graph = {};
 // graph["start"] = {};
